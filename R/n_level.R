@@ -4,7 +4,7 @@
 #' @export
 #' @importFrom assertthat assert_that noNA
 #' @return the required level to cover the bbox using a grid with cellsize
-level <- function(bbox, cellsize) {
+n_level <- function(bbox, cellsize) {
   assert_that(inherits(bbox, "matrix"), is.numeric(bbox), noNA(bbox),
               ncol(bbox) == 2, nrow(bbox) >= 1,
               all(bbox[, 1] < bbox[, 2]), inherits(cellsize, "numeric"),
