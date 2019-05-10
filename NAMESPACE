@@ -3,6 +3,7 @@
 export(add_level)
 export(connect_db)
 export(create_index)
+export(extract_sample)
 export(has_index)
 export(is_grtsdb)
 export(n_level)
