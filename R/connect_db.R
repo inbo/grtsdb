@@ -8,10 +8,10 @@ connect_db <- function(db = getOption("grtsdb", "grts.sqlite")) {
   conn <- dbConnect(SQLite(), db)
   available <- dbListTables(conn)
   available <- available[grep("level%02i", available)]
-  conn <- list(
+  grtsdb <- list(
     conn = conn,
     levels = as.integer(gsub("level", "", available))
   )
-  class(conn) <- "grtsdb"
-  return(conn)
+  class(grtsdb) <- "grtsdb"
+  return(grtsdb)
 }
