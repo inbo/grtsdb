@@ -6,8 +6,8 @@
 #' @export
 #' @importFrom assertthat assert_that is.flag noNA is.count
 #' @importFrom RSQLite dbSendStatement dbClearResult dbWriteTable
-add_level <- function(
-  grtsdb = connect_db(), bbox, cellsize, verbose = TRUE, level) {
+add_level <- function(grtsdb = getOption("grtsdb", "grts.sqlite"), bbox,
+                      cellsize, verbose = TRUE, level) {
   assert_that(is.flag(verbose), noNA(verbose))
   if (missing(level)) {
     level <- n_level(bbox = bbox, cellsize = cellsize)
@@ -15,11 +15,10 @@ add_level <- function(
   } else {
     assert_that(is.count(level), inherits(bbox, "matrix"), nrow(bbox) >= 1)
   }
-  assert_that(is_grtsdb(grtsdb))
-  if (level %in% grtsdb$levels) {
-    return(invisible(grtsdb))
+  if (level %in% which_level(grtsdb)) {
+    return(invisible(NULL))
   }
-  if (length(grtsdb$levels) == 0) {
+  if (length(which_level(grtsdb)) == 0) {
     if (level == 1) {
       if (verbose) {
         message("Adding level ", level, ": create table", appendLF = FALSE)
@@ -28,7 +27,7 @@ add_level <- function(
       sql <- sprintf(
         "CREATE TABLE IF NOT EXISTS level%02i (%s, ranking INTEGER)",
         level, paste(sql, collapse = ", "))
-      res <- dbSendStatement(grtsdb$conn, sql)
+      res <- dbSendStatement(grtsdb, sql)
       dbClearResult(res)
       df <- expand.grid(rep(list(0:1), nrow(bbox)))
       colnames(df) <- sprintf("x%i", seq_len(nrow(bbox)))
@@ -37,19 +36,19 @@ add_level <- function(
       if (verbose) {
         message(", add coordinates, calculate ranking")
       }
-      dbWriteTable(conn = grtsdb$conn, name = sprintf("level%02i", level),
+      dbWriteTable(conn = grtsdb, name = sprintf("level%02i", level),
                    value = df, append = TRUE)
-      grtsdb$levels <- sort(c(grtsdb$levels, as.integer(level)))
-      return(invisible(grtsdb))
+      return(invisible(NULL))
     } else {
-      grtsdb <- add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
+      add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
                           cellsize = cellsize, verbose = verbose)
     }
   }
-  if (max(grtsdb$levels) > level) {
-    if (level < max(grtsdb$levels) - 1) {
-      grtsdb <- add_level(grtsdb = grtsdb, level = level + 1, bbox = bbox,
-                          cellsize = cellsize, verbose = verbose)
+
+  if (max(which_level(grtsdb)) > level) {
+    if (level < max(which_level(grtsdb)) - 1) {
+      add_level(grtsdb = grtsdb, level = level + 1, bbox = bbox,
+                cellsize = cellsize, verbose = verbose)
     }
     if (verbose) {
       message("Adding level ", level, ": create table", appendLF = FALSE)
@@ -58,7 +57,7 @@ add_level <- function(
     sql <- sprintf("CREATE TABLE IF NOT EXISTS level%02i
   (%s, level%02i INTEGER, ranking INTEGER)",
       level, paste(sql, collapse = ", "), level - 1)
-    res <- dbSendStatement(grtsdb$conn, sql)
+    res <- dbSendStatement(grtsdb, sql)
     dbClearResult(res)
     if (verbose) {
       message(", add coordinates, calculate ranking")
@@ -73,14 +72,13 @@ FROM level%4$02i
 GROUP BY level%3$02i",
             paste(fields, collapse = ",\n  "), level - 1, level, level + 1,
             2 ^ nrow(bbox))
-    res <- dbSendStatement(grtsdb$conn, sql)
+    res <- dbSendStatement(grtsdb, sql)
     dbClearResult(res)
-    grtsdb$levels <- sort(c(level, grtsdb$levels))
-    return(invisible(grtsdb))
+    return(invisible(NULL))
   }
-  if (max(grtsdb$levels) + 1 < level) {
-    grtsdb <- add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
-                        cellsize = cellsize, verbose = verbose)
+  if (max(which_level(grtsdb)) + 1 < level) {
+    add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
+              cellsize = cellsize, verbose = verbose)
   }
   if (verbose) {
     message("Adding level ", level, ": create table", appendLF = FALSE)
@@ -90,7 +88,7 @@ GROUP BY level%3$02i",
 "CREATE TABLE IF NOT EXISTS level%02i
     (%s, level%02i INTEGER, ranking INTEGER)",
     level, paste(sql, collapse = ", "), level - 1)
-  res <- dbSendStatement(grtsdb$conn, sql)
+  res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
   if (verbose) {
     message(", add coordinates", appendLF = FALSE)
@@ -115,7 +113,7 @@ INSERT INTO level%2$02i
 SELECT %3$s, level%4$02i, ranking FROM cte_base ORDER BY level%4$02i, z",
     paste(sql, collapse = "\nUNION ALL\n  "), level,
     paste(colnames(df), collapse = ", "), level - 1)
-  res <- dbSendStatement(grtsdb$conn, sql)
+  res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
   if (verbose) {
     message(", calculate ranking")
@@ -124,8 +122,7 @@ SELECT %3$s, level%4$02i, ranking FROM cte_base ORDER BY level%4$02i, z",
     "UPDATE level%02i SET
   ranking = %i * (rowid - %i * level%02i - 1) + ranking",
     level, (2 ^ nrow(bbox)) ^ (level - 1), 2 ^ nrow(bbox), level - 1)
-  res <- dbSendStatement(grtsdb$conn, sql)
+  res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
-  grtsdb$levels <- sort(c(grtsdb$levels, as.integer(level)))
-  return(invisible(grtsdb))
+  return(NULL)
 }

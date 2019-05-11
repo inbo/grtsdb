@@ -4,15 +4,17 @@
 #' @export
 #' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbListTables dbListFields dbGetQuery
-extract_sample <- function(grtsdb = connect_db(), samplesize, bbox, cellsize) {
-  assert_that(is_grtsdb(grtsdb), is.count(samplesize))
+extract_sample <- function(grtsdb = getOption("grtsdb", "grts.sqlite"),
+                           samplesize, bbox, cellsize) {
+  assert_that(is.count(samplesize))
   level <- n_level(bbox = bbox, cellsize = cellsize)
   if (!has_index(grtsdb, level)) {
-    message("creating index, may take some time...", appendLF = FALSE)
-    grtsdb <- create_index(grtsdb = grtsdb, level = level)
-    message(" done")
+    message("Creating index for level ", level, ". May take some time...",
+            appendLF = FALSE)
+    create_index(grtsdb = grtsdb, level = level)
+    message(" Done.")
   }
-  fields <- dbListFields(grtsdb$conn, sprintf("level%02i", level))
+  fields <- dbListFields(grtsdb, sprintf("level%02i", level))
   fields <- fields[grep("^x[[:digit:]]*$", fields)]
   center <- rowMeans(bbox)
   midpoint <- 2 ^ (level - 1) - 0.5
@@ -25,5 +27,5 @@ extract_sample <- function(grtsdb = connect_db(), samplesize, bbox, cellsize) {
   sql <- sprintf(
     "SELECT %s, ranking FROM level%02i WHERE %s ORDER BY ranking LIMIT %i",
     paste(fields, collapse = ", "), level, where, samplesize)
-  dbGetQuery(grtsdb$conn, sql)
+  dbGetQuery(grtsdb, sql)
 }

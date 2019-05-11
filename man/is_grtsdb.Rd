@@ -4,7 +4,7 @@
 \alias{is_grtsdb}
 \title{Check is an object is a grtsdb}
 \usage{
-is_grtsdb(grtsdb)
+is_grtsdb(grtsdb = getOption("grtsdb", "grts.sqlite"))
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}

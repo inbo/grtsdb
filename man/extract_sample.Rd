@@ -4,7 +4,8 @@
 \alias{extract_sample}
 \title{extract the grts sample}
 \usage{
-extract_sample(grtsdb = connect_db(), samplesize, bbox, cellsize)
+extract_sample(grtsdb = getOption("grtsdb", "grts.sqlite"), samplesize,
+  bbox, cellsize)
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}

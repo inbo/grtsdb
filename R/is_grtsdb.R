@@ -2,17 +2,8 @@
 #' @param grtsdb the grtsdb object
 #' @export
 #' @importFrom assertthat has_name
-is_grtsdb <- function(grtsdb) {
-  if (!inherits(grtsdb, "grtsdb")) {
-    return(FALSE)
-  }
-  if (!is.list(grtsdb)) {
-    return(FALSE)
-  }
-  if (!has_name(grtsdb, c("conn", "levels"))) {
-    return(FALSE)
-  }
-  if (!inherits(grtsdb$conn, "DBIConnection")) {
+is_grtsdb <- function(grtsdb = getOption("grtsdb", "grts.sqlite")) {
+  if (!inherits(grtsdb, "SQLiteConnection")) {
     return(FALSE)
   }
   return(TRUE)

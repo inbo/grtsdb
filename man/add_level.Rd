@@ -4,7 +4,8 @@
 \alias{add_level}
 \title{Add a level to the grtsdb}
 \usage{
-add_level(grtsdb = connect_db(), bbox, cellsize, verbose = TRUE, level)
+add_level(grtsdb = getOption("grtsdb", "grts.sqlite"), bbox, cellsize,
+  verbose = TRUE, level)
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}

@@ -4,14 +4,14 @@
 #' @importFrom RSQLite dbSendStatement dbClearResult
 compact_db <- function(grtsdb) {
   assert_that(is_grtsdb(grtsdb))
-  level <- dbListTables(grtsdb$conn)
+  level <- dbListTables(grtsdb)
   level <- level[grep("level[[:digit:]]*", level)]
   level <- as.integer(gsub("level", "", level))
   sql <- sprintf("DROP INDEX IF EXISTS idx%02i", level)
   sapply(
     sql,
     function(x) {
-      res <- dbSendStatement(grtsdb$conn, x)
+      res <- dbSendStatement(grtsdb, x)
       dbClearResult(res)
     }
   )
@@ -19,12 +19,11 @@ compact_db <- function(grtsdb) {
   sapply(
     sql,
     function(x) {
-      res <- dbSendStatement(grtsdb$conn, x)
+      res <- dbSendStatement(grtsdb, x)
       dbClearResult(res)
     }
   )
-  res <- dbSendStatement(grtsdb$conn, "VACUUM")
+  res <- dbSendStatement(grtsdb, "VACUUM")
   dbClearResult(res)
-  grtsdb$levels <- max(level)
-  return(invisible(grtsdb))
+  return(NULL)
 }

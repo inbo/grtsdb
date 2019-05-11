@@ -4,7 +4,7 @@
 \alias{has_index}
 \title{has a table the required index}
 \usage{
-has_index(grtsdb, level)
+has_index(grtsdb = getOption("grtsdb", "grts.sqlite"), level)
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}
