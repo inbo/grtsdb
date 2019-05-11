@@ -47,7 +47,36 @@ add_level <- function(
     }
   }
   if (max(grtsdb$levels) > level) {
-    stop("higher level available")
+    if (level < max(grtsdb$levels) - 1) {
+      grtsdb <- add_level(grtsdb = grtsdb, level = level + 1, bbox = bbox,
+                          cellsize = cellsize, verbose = verbose)
+    }
+    if (verbose) {
+      message("Adding level ", level, ": create table", appendLF = FALSE)
+    }
+    sql <- sprintf("x%i INTEGER", seq_len(nrow(bbox)))
+    sql <- sprintf("CREATE TABLE IF NOT EXISTS level%02i
+  (%s, level%02i INTEGER, ranking INTEGER)",
+      level, paste(sql, collapse = ", "), level - 1)
+    res <- dbSendStatement(grtsdb$conn, sql)
+    dbClearResult(res)
+    if (verbose) {
+      message(", add coordinates, calculate ranking")
+    }
+    fields <- sprintf("min(x%1$i / 2) AS x%1$i", seq_len(nrow(bbox)))
+    sql <- sprintf("INSERT INTO level%3$02i
+SELECT
+  %1$s,
+  level%3$02i - %5$i * cast(level%3$02i / %5$i AS int) AS level%2$02i,
+  level%3$02i AS ranking
+FROM level%4$02i
+GROUP BY level%3$02i",
+            paste(fields, collapse = ",\n  "), level - 1, level, level + 1,
+            2 ^ nrow(bbox))
+    res <- dbSendStatement(grtsdb$conn, sql)
+    dbClearResult(res)
+    grtsdb$levels <- sort(c(level, grtsdb$levels))
+    return(invisible(grtsdb))
   }
   if (max(grtsdb$levels) + 1 < level) {
     grtsdb <- add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
@@ -74,8 +103,8 @@ add_level <- function(
       sprintf("%1$s * 2 + %2$i AS %1$s", i, df[[i]])
     }
   )
-  sql <- sprintf(
-"SELECT %1$s, ranking, rowid AS level%2$02i, random() AS z FROM level%2$02i",
+  sql <- sprintf("SELECT %1$s, ranking, rowid - 1 AS level%2$02i, random() AS z
+FROM level%2$02i",
     apply(sql, 1, paste, collapse = ", "), level - 1)
   sql <- sprintf(
     "WITH cte_base AS (
@@ -93,7 +122,7 @@ SELECT %3$s, level%4$02i, ranking FROM cte_base ORDER BY level%4$02i, z",
   }
   sql <- sprintf(
     "UPDATE level%02i SET
-  ranking = %i * (rowid - %i * (level%02i - 1) - 1) + ranking",
+  ranking = %i * (rowid - %i * level%02i - 1) + ranking",
     level, (2 ^ nrow(bbox)) ^ (level - 1), 2 ^ nrow(bbox), level - 1)
   res <- dbSendStatement(grtsdb$conn, sql)
   dbClearResult(res)
