@@ -2,7 +2,7 @@
 #' @export
 #' @inheritParams add_level
 #' @importFrom RSQLite dbSendStatement dbClearResult
-compact_db <- function(grtsdb) {
+compact_db <- function(grtsdb = connect_db()) {
   assert_that(is_grtsdb(grtsdb))
   level <- dbListTables(grtsdb)
   level <- level[grep("level[[:digit:]]*", level)]

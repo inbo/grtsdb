@@ -4,11 +4,10 @@
 #' @export
 #' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbListTables dbListFields dbGetQuery
-extract_sample <- function(grtsdb = getOption("grtsdb", "grts.sqlite"),
-                           samplesize, bbox, cellsize) {
+extract_sample <- function(grtsdb = connect_db(), samplesize, bbox, cellsize) {
   assert_that(is.count(samplesize))
   level <- n_level(bbox = bbox, cellsize = cellsize)
-  if (!has_index(grtsdb, level)) {
+  if (!has_index(grtsdb = grtsdb, level = level)) {
     message("Creating index for level ", level, ". May take some time...",
             appendLF = FALSE)
     create_index(grtsdb = grtsdb, level = level)

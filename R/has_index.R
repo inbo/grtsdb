@@ -3,7 +3,7 @@
 #' @export
 #' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbListTables dbGetQuery
-has_index <- function(grtsdb = getOption("grtsdb", "grts.sqlite"), level) {
+has_index <- function(level, grtsdb = connect_db()) {
   assert_that(is_grtsdb(grtsdb), is.count(level))
   if (!sprintf("level%02i", level) %in% dbListTables(grtsdb)) {
     stop(sprintf("level %i is not available. use add_level()", level))

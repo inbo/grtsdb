@@ -4,7 +4,7 @@
 \alias{which_level}
 \title{Return a vector of level number which are available in the database}
 \usage{
-which_level(grtsdb = getOption("grtsdb", "grts.sqlite"))
+which_level(grtsdb = connect_db())
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}

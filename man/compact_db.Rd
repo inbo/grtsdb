@@ -4,7 +4,7 @@
 \alias{compact_db}
 \title{Compact the database by removing the lower levels and all indices}
 \usage{
-compact_db(grtsdb)
+compact_db(grtsdb = connect_db())
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}

@@ -4,12 +4,12 @@
 \alias{create_index}
 \title{Add the index to the table}
 \usage{
-create_index(grtsdb = getOption("grtsdb", "grts.sqlite"), level)
+create_index(level, grtsdb = connect_db())
 }
 \arguments{
-\item{grtsdb}{the grtsdb object}
-
 \item{level}{the required level}
+
+\item{grtsdb}{the grtsdb object}
 }
 \description{
 Add the index to the table

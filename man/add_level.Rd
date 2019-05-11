@@ -4,15 +4,14 @@
 \alias{add_level}
 \title{Add a level to the grtsdb}
 \usage{
-add_level(grtsdb = getOption("grtsdb", "grts.sqlite"), bbox, cellsize,
-  verbose = TRUE, level)
+add_level(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE, level)
 }
 \arguments{
-\item{grtsdb}{the grtsdb object}
-
 \item{bbox}{two-column matrix; the first column has the minimum, the second the maximum values; rows represent the spatial dimensions}
 
 \item{cellsize}{the size of each cell. Either a single value or one value for each dimension.}
+
+\item{grtsdb}{the grtsdb object}
 
 \item{verbose}{Display progress}
 

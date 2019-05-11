@@ -1,5 +1,5 @@
 context("minimal checks")
-conn <- RSQLite::dbConnect(RSQLite::SQLite(), ":memory:")
+expect_is(conn <- connect_db(":memory:"), "SQLiteConnection")
 bbox <- rbind(c(0, 7), c(0,7))
 cellsize <- 1
 expect_message(

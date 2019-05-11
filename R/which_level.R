@@ -3,7 +3,7 @@
 #' @export
 #' @importFrom assertthat assert_that
 #' @importFrom RSQLite dbListTables
-which_level <- function(grtsdb = getOption("grtsdb", "grts.sqlite")) {
+which_level <- function(grtsdb = connect_db()) {
   assert_that(is_grtsdb(grtsdb))
   available <- dbListTables(grtsdb)
   available <- available[grep("level[[:digit:]]{2}", available)]

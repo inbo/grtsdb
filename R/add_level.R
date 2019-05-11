@@ -6,8 +6,8 @@
 #' @export
 #' @importFrom assertthat assert_that is.flag noNA is.count
 #' @importFrom RSQLite dbSendStatement dbClearResult dbWriteTable
-add_level <- function(grtsdb = getOption("grtsdb", "grts.sqlite"), bbox,
-                      cellsize, verbose = TRUE, level) {
+add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
+                      level) {
   assert_that(is.flag(verbose), noNA(verbose))
   if (missing(level)) {
     level <- n_level(bbox = bbox, cellsize = cellsize)
