@@ -24,3 +24,5 @@ RoxygenNote: 6.1.1
 Imports:
   assertthat,
   RSQLite
+Suggests:
+  testthat
