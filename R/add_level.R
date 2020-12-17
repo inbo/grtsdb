@@ -11,7 +11,9 @@ add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
   assert_that(is.flag(verbose), noNA(verbose))
   if (missing(level)) {
     level <- n_level(bbox = bbox, cellsize = cellsize)
-    message("Required number of levels: ", level)
+    if (verbose) {
+      message("Required number of levels: ", level)
+    }
   } else {
     assert_that(is.count(level), inherits(bbox, "matrix"), nrow(bbox) >= 1)
   }

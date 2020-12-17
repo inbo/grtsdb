@@ -4,7 +4,13 @@
 \alias{extract_sample}
 \title{extract the grts sample}
 \usage{
-extract_sample(grtsdb = connect_db(), samplesize, bbox, cellsize)
+extract_sample(
+  grtsdb = connect_db(),
+  samplesize,
+  bbox,
+  cellsize,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{grtsdb}{the grtsdb object}
@@ -14,6 +20,8 @@ extract_sample(grtsdb = connect_db(), samplesize, bbox, cellsize)
 \item{bbox}{two-column matrix; the first column has the minimum, the second the maximum values; rows represent the spatial dimensions}
 
 \item{cellsize}{the size of each cell. Either a single value or one value for each dimension.}
+
+\item{verbose}{Display progress}
 }
 \description{
 extract the grts sample
