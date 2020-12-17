@@ -4,16 +4,13 @@
 #' @param level the required level
 #' @param verbose Display progress
 #' @export
-#' @importFrom assertthat assert_that is.flag noNA is.count
+#' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbSendStatement dbClearResult dbWriteTable
 add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
                       level) {
-  assert_that(is.flag(verbose), noNA(verbose))
   if (missing(level)) {
     level <- n_level(bbox = bbox, cellsize = cellsize)
-    if (verbose) {
-      message("Required number of levels: ", level)
-    }
+    show_message("Required number of levels: ", level, verbose = verbose)
   } else {
     assert_that(is.count(level), inherits(bbox, "matrix"), nrow(bbox) >= 1)
   }
@@ -22,9 +19,10 @@ add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
   }
   if (length(which_level(grtsdb)) == 0) {
     if (level == 1) {
-      if (verbose) {
-        message("Adding level ", level, ": create table", appendLF = FALSE)
-      }
+      show_message(
+        "Adding level ", level, ": create table", appendLF = FALSE,
+        verbose = verbose
+      )
       sql <- sprintf("x%i INTEGER", seq_len(nrow(bbox)))
       sql <- sprintf(
         "CREATE TABLE IF NOT EXISTS level%02i (%s, ranking INTEGER)",
@@ -35,9 +33,7 @@ add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
       colnames(df) <- sprintf("x%i", seq_len(nrow(bbox)))
       df <- df[sample(nrow(df)), ]
       df$ranking <- seq_len(nrow(df)) - 1
-      if (verbose) {
-        message(", add coordinates, calculate ranking")
-      }
+      show_message(", add coordinates, calculate ranking", verbose = verbose)
       dbWriteTable(conn = grtsdb, name = sprintf("level%02i", level),
                    value = df, append = TRUE)
       return(invisible(NULL))
@@ -52,18 +48,17 @@ add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
       add_level(grtsdb = grtsdb, level = level + 1, bbox = bbox,
                 cellsize = cellsize, verbose = verbose)
     }
-    if (verbose) {
-      message("Adding level ", level, ": create table", appendLF = FALSE)
-    }
+    show_message(
+      "Adding level ", level, ": create table", appendLF = FALSE,
+      verbose = verbose
+    )
     sql <- sprintf("x%i INTEGER", seq_len(nrow(bbox)))
     sql <- sprintf("CREATE TABLE IF NOT EXISTS level%02i
   (%s, level%02i INTEGER, ranking INTEGER)",
       level, paste(sql, collapse = ", "), level - 1)
     res <- dbSendStatement(grtsdb, sql)
     dbClearResult(res)
-    if (verbose) {
-      message(", add coordinates, calculate ranking")
-    }
+    show_message(", add coordinates, calculate ranking", verbose = verbose)
     fields <- sprintf("min(x%1$i / 2) AS x%1$i", seq_len(nrow(bbox)))
     sql <- sprintf("INSERT INTO level%3$02i
 SELECT
@@ -82,9 +77,10 @@ GROUP BY level%3$02i",
     add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
               cellsize = cellsize, verbose = verbose)
   }
-  if (verbose) {
-    message("Adding level ", level, ": create table", appendLF = FALSE)
-  }
+  show_message(
+    "Adding level ", level, ": create table", appendLF = FALSE,
+    verbose = verbose
+  )
   sql <- sprintf("x%i INTEGER", seq_len(nrow(bbox)))
   sql <- sprintf(
 "CREATE TABLE IF NOT EXISTS level%02i
@@ -92,9 +88,7 @@ GROUP BY level%3$02i",
     level, paste(sql, collapse = ", "), level - 1)
   res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
-  if (verbose) {
-    message(", add coordinates", appendLF = FALSE)
-  }
+  show_message(", add coordinates", appendLF = FALSE, verbose = verbose)
   df <- expand.grid(rep(list(0:1), nrow(bbox)))
   colnames(df) <- sprintf("x%i", seq_len(nrow(bbox)))
   sql <- sapply(
@@ -117,9 +111,7 @@ SELECT %3$s, level%4$02i, ranking FROM cte_base ORDER BY level%4$02i, z",
     paste(colnames(df), collapse = ", "), level - 1)
   res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
-  if (verbose) {
-    message(", calculate ranking")
-  }
+  show_message(", calculate ranking", verbose = verbose)
   sql <- sprintf(
     "UPDATE level%02i SET
   ranking = %i * (rowid - %i * level%02i - 1) + ranking",

@@ -2,26 +2,23 @@
 #' @inheritParams add_level
 #' @param samplesize the required sample size
 #' @export
-#' @importFrom assertthat assert_that is.count is.flag noNA
+#' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbListTables dbListFields dbGetQuery
 extract_sample <- function(
   grtsdb = connect_db(), samplesize, bbox, cellsize, verbose = TRUE
 ) {
   assert_that(is.count(samplesize))
-  assert_that(is.flag(verbose), noNA(verbose))
   level <- n_level(bbox = bbox, cellsize = cellsize)
   if (!has_index(grtsdb = grtsdb, level = level)) {
-    if (verbose) {
-      message("Creating index for level ", level, ". May take some time...",
-              appendLF = FALSE)
-    }
+    show_message(
+      "Creating index for level ", level, ". May take some time...",
+      appendLF = FALSE, verbose = verbose
+    )
     create_index(
       grtsdb = grtsdb, level = level, bbox = bbox, cellsize = cellsize,
       verbose = verbose
     )
-    if (verbose) {
-      message(" Done.")
-    }
+    show_message(" Done.", verbose = verbose)
   }
   fields <- dbListFields(grtsdb, sprintf("level%02i", level))
   fields <- fields[grep("^x[[:digit:]]*$", fields)]
