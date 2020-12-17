@@ -1,6 +1,6 @@
 context("minimal checks")
 expect_is(conn <- connect_db(":memory:"), "SQLiteConnection")
-bbox <- rbind(c(0, 7), c(0,7))
+bbox <- rbind(c(0, 7), c(0, 7))
 cellsize <- 1
 expect_message(
   add_level(grtsdb = conn, bbox = bbox, cellsize = cellsize),

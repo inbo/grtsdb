@@ -7,9 +7,12 @@
 add_level(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE, level)
 }
 \arguments{
-\item{bbox}{two-column matrix; the first column has the minimum, the second the maximum values; rows represent the spatial dimensions}
+\item{bbox}{A two-column matrix.
+The first column has the minimum, the second the maximum values.
+Rows represent the spatial dimensions.}
 
-\item{cellsize}{the size of each cell. Either a single value or one value for each dimension.}
+\item{cellsize}{The size of each cell.
+Either a single value or one value for each dimension.}
 
 \item{grtsdb}{the grtsdb object}
 
