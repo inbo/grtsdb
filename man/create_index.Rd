@@ -4,12 +4,20 @@
 \alias{create_index}
 \title{Add the index to the table}
 \usage{
-create_index(level, grtsdb = connect_db())
+create_index(level, grtsdb = connect_db(), ...)
 }
 \arguments{
 \item{level}{the required level}
 
 \item{grtsdb}{the grtsdb object}
+
+\item{...}{
+  Arguments passed on to \code{\link[=add_level]{add_level}}
+  \describe{
+    \item{\code{verbose}}{Display progress}
+    \item{\code{bbox}}{two-column matrix; the first column has the minimum, the second the maximum values; rows represent the spatial dimensions}
+    \item{\code{cellsize}}{the size of each cell. Either a single value or one value for each dimension.}
+  }}
 }
 \description{
 Add the index to the table

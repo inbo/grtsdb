@@ -10,7 +10,9 @@ extract_sample <- function(grtsdb = connect_db(), samplesize, bbox, cellsize) {
   if (!has_index(grtsdb = grtsdb, level = level)) {
     message("Creating index for level ", level, ". May take some time...",
             appendLF = FALSE)
-    create_index(grtsdb = grtsdb, level = level)
+    create_index(
+      grtsdb = grtsdb, level = level, bbox = bbox, cellsize = cellsize
+    )
     message(" Done.")
   }
   fields <- dbListFields(grtsdb, sprintf("level%02i", level))
