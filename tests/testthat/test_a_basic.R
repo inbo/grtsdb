@@ -7,7 +7,7 @@ expect_message(
   "Required number of levels"
 )
 expect_null(compact_db(grtsdb = conn))
-expect_error(has_index(grtsdb = conn, level = 1), "level 1 is not available")
+expect_false(has_index(grtsdb = conn, level = 1))
 expect_message(
   create_index(grtsdb = conn, level = 1, bbox = bbox, cellsize = cellsize),
   "Adding level 1"

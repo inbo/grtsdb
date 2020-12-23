@@ -4,12 +4,15 @@
 \alias{create_index}
 \title{Add the index to the table}
 \usage{
-create_index(level, grtsdb = connect_db(), ...)
+create_index(level, grtsdb = connect_db(), legacy = FALSE, ...)
 }
 \arguments{
 \item{level}{the required level}
 
 \item{grtsdb}{the grtsdb object}
+
+\item{legacy}{Use legacy sites.
+Defaults to \code{FALSE}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=add_level]{add_level}}
