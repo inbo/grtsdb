@@ -1,0 +1,17 @@
+description: Configuration file for checklist::check_pkg()
+package: yes
+allowed:
+  warnings: []
+  notes:
+  - motivation: GitHub pages not ready yet.
+    value: |-
+      checking CRAN incoming feasibility ... NOTE
+      Maintainer: ‘Thierry Onkelinx <thierry.onkelinx@inbo.be>’
+
+      New submission
+
+      Found the following (possibly) invalid URLs:
+        URL: https://packages.inbo.be/grtsdb
+          From: DESCRIPTION
+          Status: 404
+          Message: Not Found

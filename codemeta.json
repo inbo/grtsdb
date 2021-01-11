@@ -1,0 +1,114 @@
+{
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
+  "@type": "SoftwareSourceCode",
+  "identifier": "grtsdb",
+  "description": "Create an SQLite database containing the sampling framework\n    for different levels of resolution. Take a sample from this framework.",
+  "name": "grtsdb: Create a Sampling Frame Using GRTS",
+  "codeRepository": "https://github.com/inbo/grtsdb",
+  "license": "https://spdx.org/licenses/GPL-3.0",
+  "version": "0.2",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Thierry",
+      "familyName": "Onkelinx",
+      "email": "thierry.onkelinx@inbo.be",
+      "@id": "https://orcid.org/0000-0001-8804-4216"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Bruno",
+      "familyName": "De Vos",
+      "email": "bruno.devos@inbo.be",
+      "@id": "https://orcid.org/0000-0001-9523-3453"
+    }
+  ],
+  "contributor": {},
+  "copyrightHolder": [
+    {
+      "@type": "Organization",
+      "name": "Research Institute for Nature and Forest",
+      "email": "info@inbo.be"
+    }
+  ],
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "Research Institute for Nature and Forest",
+      "email": "info@inbo.be"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Thierry",
+      "familyName": "Onkelinx",
+      "email": "thierry.onkelinx@inbo.be",
+      "@id": "https://orcid.org/0000-0001-8804-4216"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "RSQLite",
+      "name": "RSQLite",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=RSQLite"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "assertthat",
+      "name": "assertthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=assertthat"
+    }
+  ],
+  "relatedLink": "https://packages.inbo.be/grtsdb",
+  "releaseNotes": "https://github.com/inbo/grtsdb/blob/master/NEWS.md",
+  "fileSize": "32.993KB",
+  "contIntegration": "https://codecov.io/gh/inbo/grtsdb?branch=master",
+  "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
+  "keywords": [
+    "r",
+    "r-package",
+    "r-stats",
+    "grts",
+    "sampling",
+    "sampling-methods",
+    "sqlite"
+  ],
+  "issueTracker": "https://github.com/inbo/grtsdb"
+}

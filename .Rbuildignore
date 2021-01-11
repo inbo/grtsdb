@@ -1,2 +1,9 @@
+^checklist\.yml$
+^codecov\.yml$
+^codemeta\.json$
+^docsl$
 ^grtsdb\.Rproj$
+^LICENSE\.md$
+^README\.Rmd$
 ^\.Rproj\.user$
+^\.github$

@@ -1,4 +1,4 @@
-#' Extract the GRTS sample with legancy sites
+#' Extract the GRTS sample with legacy sites
 #' @inheritParams add_level
 #' @inheritParams extract_sample
 #' @export

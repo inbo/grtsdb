@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_legacy_sample.R
 \name{extract_legacy_sample}
 \alias{extract_legacy_sample}
-\title{Extract the GRTS sample with legancy sites}
+\title{Extract the GRTS sample with legacy sites}
 \usage{
 extract_legacy_sample(
   grtsdb = connect_db(),
@@ -31,5 +31,5 @@ Either a single value or one value for each dimension.}
 This is useful in cases where you need extra samples.}
 }
 \description{
-Extract the GRTS sample with legancy sites
+Extract the GRTS sample with legacy sites
 }

@@ -6,3 +6,7 @@
 connect_db <- function(db = getOption("grtsdb", "grts.sqlite")) {
   dbConnect(SQLite(), db)
 }
+
+#' @importFrom RSQLite dbDisconnect
+#' @export
+DBI::dbDisconnect
