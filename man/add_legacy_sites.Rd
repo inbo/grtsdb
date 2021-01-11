@@ -22,3 +22,9 @@ Either a single value or one value for each dimension.}
 \description{
 Add legacy sites
 }
+\seealso{
+Other legacy: 
+\code{\link{drop_legacy_sites}()},
+\code{\link{extract_legacy_sample}()}
+}
+\concept{legacy}

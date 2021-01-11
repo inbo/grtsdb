@@ -5,6 +5,13 @@
 \alias{reexports}
 \alias{dbDisconnect}
 \title{Objects exported from other packages}
+\seealso{
+Other base: 
+\code{\link{add_level}()},
+\code{\link{connect_db}()},
+\code{\link{extract_sample}()}
+}
+\concept{base}
 \keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links

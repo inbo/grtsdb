@@ -28,3 +28,12 @@ Either a single value or one value for each dimension.}
 \description{
 has a table the required index
 }
+\seealso{
+Other utility: 
+\code{\link{compact_db}()},
+\code{\link{create_index}()},
+\code{\link{is_grtsdb}()},
+\code{\link{n_level}()},
+\code{\link{which_level}()}
+}
+\concept{utility}

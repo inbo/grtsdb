@@ -3,10 +3,12 @@
 #' @export
 #' @importFrom assertthat assert_that is.string
 #' @importFrom RSQLite dbConnect SQLite
+#' @family base
 connect_db <- function(db = getOption("grtsdb", "grts.sqlite")) {
   dbConnect(SQLite(), db)
 }
 
 #' @importFrom RSQLite dbDisconnect
 #' @export
+#' @family base
 DBI::dbDisconnect

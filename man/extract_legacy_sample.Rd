@@ -33,3 +33,9 @@ This is useful in cases where you need extra samples.}
 \description{
 Extract the GRTS sample with legacy sites
 }
+\seealso{
+Other legacy: 
+\code{\link{add_legacy_sites}()},
+\code{\link{drop_legacy_sites}()}
+}
+\concept{legacy}

@@ -3,6 +3,7 @@
 #' @export
 #' @importFrom assertthat assert_that
 #' @importFrom RSQLite dbListTables
+#' @family utility
 which_level <- function(grtsdb = connect_db()) {
   assert_that(is_grtsdb(grtsdb))
   available <- dbListTables(grtsdb)

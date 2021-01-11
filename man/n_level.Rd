@@ -20,3 +20,12 @@ the required level to cover the bbox using a grid with cellsize
 \description{
 Calculate the required level based on a bounding box and a cellsize
 }
+\seealso{
+Other utility: 
+\code{\link{compact_db}()},
+\code{\link{create_index}()},
+\code{\link{has_index}()},
+\code{\link{is_grtsdb}()},
+\code{\link{which_level}()}
+}
+\concept{utility}

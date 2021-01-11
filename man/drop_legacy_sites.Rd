@@ -14,3 +14,9 @@ drop_legacy_sites(level, grtsdb = connect_db())
 \description{
 Drop the table with legacy sites for a given level
 }
+\seealso{
+Other legacy: 
+\code{\link{add_legacy_sites}()},
+\code{\link{extract_legacy_sample}()}
+}
+\concept{legacy}

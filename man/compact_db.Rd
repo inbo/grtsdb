@@ -12,3 +12,12 @@ compact_db(grtsdb = connect_db())
 \description{
 Compact the database by removing the lower levels and all indices
 }
+\seealso{
+Other utility: 
+\code{\link{create_index}()},
+\code{\link{has_index}()},
+\code{\link{is_grtsdb}()},
+\code{\link{n_level}()},
+\code{\link{which_level}()}
+}
+\concept{utility}

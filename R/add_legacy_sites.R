@@ -7,6 +7,7 @@
 #' @importFrom RSQLite dbClearResult dbGetQuery dbListFields dbListTables
 #' dbSendStatement
 #' @importFrom utils head tail
+#' @family legacy
 add_legacy_sites <- function(legacy, bbox, cellsize, grtsdb = connect_db()) {
   level <- n_level(bbox = bbox, cellsize = cellsize)
   assert_that(
@@ -111,6 +112,7 @@ add_legacy_sites <- function(legacy, bbox, cellsize, grtsdb = connect_db()) {
 #' @export
 #' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbClearResult dbSendStatement
+#' @family legacy
 drop_legacy_sites <- function(level, grtsdb = connect_db()) {
   assert_that(is.count(level))
   sql <- sprintf("DROP TABLE IF EXISTS legacy%02i", level)

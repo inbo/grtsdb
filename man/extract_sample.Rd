@@ -33,3 +33,10 @@ This is useful in cases where you need extra samples.}
 \description{
 extract the grts sample
 }
+\seealso{
+Other base: 
+\code{\link{add_level}()},
+\code{\link{connect_db}()},
+\code{\link{reexports}}
+}
+\concept{base}

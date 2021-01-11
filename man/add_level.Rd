@@ -23,3 +23,10 @@ Either a single value or one value for each dimension.}
 \description{
 Add a level to the grtsdb
 }
+\seealso{
+Other base: 
+\code{\link{connect_db}()},
+\code{\link{extract_sample}()},
+\code{\link{reexports}}
+}
+\concept{base}

@@ -6,6 +6,7 @@
 #' @export
 #' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbSendStatement dbClearResult dbWriteTable
+#' @family base
 add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
                       level) {
   if (missing(level)) {

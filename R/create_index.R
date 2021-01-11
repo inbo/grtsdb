@@ -5,6 +5,7 @@
 #' @export
 #' @importFrom assertthat assert_that is.count is.flag noNA
 #' @importFrom RSQLite dbListTables dbListFields dbSendStatement dbClearResult
+#' @family utility
 create_index <- function(level, grtsdb = connect_db(), legacy = FALSE, ...) {
   assert_that(is_grtsdb(grtsdb), is.count(level))
   assert_that(is.flag(legacy), noNA(legacy))

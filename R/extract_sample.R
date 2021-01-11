@@ -6,6 +6,7 @@
 #' @export
 #' @importFrom assertthat assert_that is.count
 #' @importFrom RSQLite dbListTables dbListFields dbGetQuery
+#' @family base
 extract_sample <- function(
   grtsdb = connect_db(), samplesize, bbox, cellsize, verbose = TRUE, offset
 ) {
