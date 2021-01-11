@@ -26,5 +26,5 @@ compact_db <- function(grtsdb = connect_db()) {
   )
   res <- dbSendStatement(grtsdb, "VACUUM")
   dbClearResult(res)
-  return(NULL)
+  return(invisible(NULL))
 }

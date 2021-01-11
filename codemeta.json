@@ -73,6 +73,18 @@
   "softwareRequirements": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "DBI",
+      "name": "DBI",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=DBI"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "RSQLite",
       "name": "RSQLite",
       "provider": {
@@ -98,7 +110,7 @@
   ],
   "relatedLink": "https://packages.inbo.be/grtsdb",
   "releaseNotes": "https://github.com/inbo/grtsdb/blob/master/NEWS.md",
-  "fileSize": "32.993KB",
+  "fileSize": "344.423KB",
   "contIntegration": "https://codecov.io/gh/inbo/grtsdb?branch=master",
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [

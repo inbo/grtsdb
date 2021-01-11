@@ -42,38 +42,60 @@ remotes::install_github("inbo/grtsdb")
 ## Example
 
 This is a basic example.
-For demonstration purposes, we store the database in memory.
-In practice you should store the database on a hard drive an archive it.
-
-```{r example}
-library(grtsdb)
-# connect database
-db <- connect_db(":memory:")
-# bounding box of the target area
-bbox <- rbind(
-  c(0, 100),
-  c(0, 100)
-)
-extract_sample(grtsdb = db, samplesize = 20, bbox = bbox, cellsize = 1)
-```
-Repeating the sample yields the same results
 
 ```{r}
-extract_sample(grtsdb = db, samplesize = 20, bbox = bbox, cellsize = 1)
+library(grtsdb)
+```
+
+Connect to a database.
+
+```{r eval = system.file("grts.sqlite", package = "grtsdb") == "", echo = FALSE}
+dir.create("inst", showWarnings = FALSE)
+db <- connect_db(file.path("inst", "grts.sqlite"))
+```
+
+```{r eval = system.file("grts.sqlite", package = "grtsdb") != ""}
+db <- connect_db(system.file("grts.sqlite", package = "grtsdb"))
+```
+
+To extract a sample, you'll need to specify the bounding box in projected
+coordinates and the size of the grid cells.
+
+```{r example}
+bbox <- rbind(
+  c(0, 32),
+  c(0, 32)
+)
+extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+```
+Repeating the sample yields the same results.
+
+```{r}
+extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+```
+
+```{r echo = FALSE}
+drop_legacy_sites(grtsdb = db, level = 5)
 ```
 
 You can add legacy sites to the sampling scheme.
 
 ```{r}
 legacy <- rbind(
-  c(25, 25),
-  c(51, 12)
+  c(4, 4),
+  c(17, 6)
 )
 add_legacy_sites(legacy, bbox = bbox, cellsize = 1, grtsdb = db)
-extract_legacy_sample(grtsdb = db, samplesize = 20, bbox = bbox, cellsize = 1)
+extract_legacy_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
 ```
 
-Disconnect database when done.
+You can compact the database for storage.
+
+```{r}
+compact_db(db)
+```
+
+Disconnect the database when done.
 
 ```{r}
 dbDisconnect(db)

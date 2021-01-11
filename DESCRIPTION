@@ -21,9 +21,9 @@ License: GPL-3
 URL: https://packages.inbo.be/grtsdb
 BugReports: https://github.com/inbo/grtsdb
 Imports:
+    DBI,
     RSQLite,
-    assertthat,
-    DBI
+    assertthat
 Suggests:
     testthat
 Encoding: UTF-8
