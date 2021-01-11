@@ -1,9 +1,10 @@
 ^checklist\.yml$
 ^codecov\.yml$
 ^codemeta\.json$
-^docsl$
+^docs$
 ^grtsdb\.Rproj$
 ^LICENSE\.md$
+^pkgdown$
 ^README\.Rmd$
 ^_pkgdown\.yml$
 ^\.Rproj\.user$
