@@ -20,6 +20,13 @@ expect_is(
   ),
   "data.frame"
 )
+expect_is(
+  extract_legacy_sample(
+    grtsdb = conn, samplesize = 10, bbox = bbox, cellsize = cellsize,
+    offset = 20
+  ),
+  "data.frame"
+)
 expect_true(
   has_index(grtsdb = conn, level = n_level(bbox, cellsize), legacy = TRUE)
 )

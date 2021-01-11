@@ -9,7 +9,8 @@ extract_legacy_sample(
   samplesize,
   bbox,
   cellsize,
-  verbose = TRUE
+  verbose = TRUE,
+  offset
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ Rows represent the spatial dimensions.}
 Either a single value or one value for each dimension.}
 
 \item{verbose}{Display progress}
+
+\item{offset}{An optional number of samples to skip.
+This is useful in cases where you need extra samples.}
 }
 \description{
 Extract the GRTS sample with legancy sites

@@ -23,4 +23,9 @@ expect_message(
   add_level(grtsdb = conn, bbox = bbox, cellsize = cellsize, level = 5),
   "Adding level 5"
 )
+expect_is(
+  extract_sample(grtsdb = conn, samplesize = 10, bbox = bbox,
+                 cellsize = cellsize, offset = 20),
+  "data.frame"
+)
 RSQLite::dbDisconnect(conn)
