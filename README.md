@@ -40,14 +40,16 @@ remotes::install_github("inbo/grtsdb")
 
 This is a basic example.
 
-``` r
-library(grtsdb)
-```
-
 Connect to a database.
 
 ``` r
-db <- connect_db(system.file("grts.sqlite", package = "grtsdb"))
+tmp_copy <- tempfile(pattern = "grts", fileext = ".sqlite")
+if (system.file("grts.sqlite", package = "grtsdb") != "") {
+  file.copy(system.file("grts.sqlite", package = "grtsdb"), tmp_copy)
+}
+#> [1] TRUE
+library(grtsdb)
+db <- connect_db(tmp_copy)
 ```
 
 To extract a sample, you’ll need to specify the bounding box in
@@ -59,7 +61,6 @@ bbox <- rbind(
   c(0, 32)
 )
 extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
-#> Creating index for level 5. May take some time... Done.
 #>     x1c  x2c ranking
 #> 1  22.5 21.5       0
 #> 2  26.5  1.5       1
