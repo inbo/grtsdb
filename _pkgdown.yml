@@ -1,0 +1,35 @@
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: NEWS
+    href: news/index.html
+  - text: Functions
+    href: reference/index.html
+  - text: Contributing
+    href: CONTRIBUTING.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/inbo/grtsdb
+  - icon: fa-twitter fa-lg
+    href: https://twitter.com/INBOVlaanderen
+  - icon: fa-facebook fg-lg
+    href: https://www.facebook.com/pg/INBOVlaanderen
+
+reference:
+- title: Base functionality
+  contents:
+  - has_concept("base")
+- title: Incorporating legacy sites
+  contents:
+  - has_concept("legacy")
+- title: Auxiliary functions
+  contents:
+  - has_concept("utility")
+
+authors:
+  Thierry Onkelinx:
+    href: "https://www.muscardinus.be"
+  Research Institute for Nature and Forest:
+    href: "https://www.inbo.be/en"
+    html: "<img src='https://ropensci.github.io/git2rdata/reference/figures/logo-en.png' height=24>"

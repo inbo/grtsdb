@@ -12,3 +12,12 @@ is_grtsdb(grtsdb = getOption("grtsdb", "grts.sqlite"))
 \description{
 Check is an object is a grtsdb
 }
+\seealso{
+Other utility: 
+\code{\link{compact_db}()},
+\code{\link{create_index}()},
+\code{\link{has_index}()},
+\code{\link{n_level}()},
+\code{\link{which_level}()}
+}
+\concept{utility}

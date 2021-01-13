@@ -12,3 +12,10 @@ connect_db(db = getOption("grtsdb", "grts.sqlite"))
 \description{
 connect to or create an SQLite database
 }
+\seealso{
+Other base: 
+\code{\link{add_level}()},
+\code{\link{extract_sample}()},
+\code{\link{reexports}}
+}
+\concept{base}
