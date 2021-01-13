@@ -25,9 +25,8 @@ knitr::opts_chunk$set(
 ![GitHub repo size](https://img.shields.io/github/repo-size/inbo/grtsdb.svg)
 <!-- badges: end -->
 
-The goal of `grtsdb` is to create as statially balanced sample based on the 'Generalised Random Tesselation Stratified' strategy.
-We store the base schema in an SQLite database.
-Store this database to make the sampling reproducible.
+The goal of `grtsdb` is to create a statially balanced sample based on the 'Generalised Random Tesselation Stratified' strategy.
+We store the base schema in an SQLite database to make the sampling reproducible.
 Sampling the same database with the same parameters yields a stable sample.
 
 ## Installation
