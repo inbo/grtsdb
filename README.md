@@ -20,11 +20,11 @@ bytes](https://img.shields.io/github/languages/code-size/inbo/grtsdb.svg)
 size](https://img.shields.io/github/repo-size/inbo/grtsdb.svg)
 <!-- badges: end -->
 
-The goal of `grtsdb` is to create as statially balanced sample based on
+The goal of `grtsdb` is to create a spatially balanced sample based on
 the ‘Generalised Random Tesselation Stratified’ strategy. We store the
-base schema in an SQLite database. Store this database to make the
-sampling reproducible. Sampling the same database with the same
-parameters yields a stable sample.
+base schema in an SQLite database to make the sampling reproducible.
+Sampling the same database with the same parameters yields a stable
+sample.
 
 ## Installation
 

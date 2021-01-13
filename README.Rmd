@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 ![GitHub repo size](https://img.shields.io/github/repo-size/inbo/grtsdb.svg)
 <!-- badges: end -->
 
-The goal of `grtsdb` is to create a statially balanced sample based on the 'Generalised Random Tesselation Stratified' strategy.
+The goal of `grtsdb` is to create a spatially balanced sample based on the 'Generalised Random Tesselation Stratified' strategy.
 We store the base schema in an SQLite database to make the sampling reproducible.
 Sampling the same database with the same parameters yields a stable sample.
 
@@ -53,8 +53,7 @@ library(grtsdb)
 db <- connect_db(tmp_copy)
 ```
 
-To extract a sample, you'll need to specify the bounding box in projected
-coordinates and the size of the grid cells.
+To extract a sample, you'll need to specify the bounding box in projected coordinates and the size of the grid cells.
 
 ```{r example}
 bbox <- rbind(
@@ -63,6 +62,7 @@ bbox <- rbind(
 )
 extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
 ```
+
 Repeating the sample yields the same results.
 
 ```{r}
@@ -89,7 +89,6 @@ You can compact the database for storage.
 ```{r}
 compact_db(db)
 ```
-
 
 Disconnect the database when done.
 
