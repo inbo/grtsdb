@@ -1,4 +1,9 @@
+^_pkgdown\.yml$
+^\.github$
+^\.Rproj\.user$
+^\.zenodo\.json$
 ^checklist\.yml$
+^CITATION\.cff$
 ^codecov\.yml$
 ^codemeta\.json$
 ^docs$
@@ -6,6 +11,3 @@
 ^LICENSE\.md$
 ^pkgdown$
 ^README\.Rmd$
-^_pkgdown\.yml$
-^\.Rproj\.user$
-^\.github$
