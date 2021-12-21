@@ -32,22 +32,28 @@ add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
       dbClearResult(res)
       df <- expand.grid(rep(list(0:1), nrow(bbox)))
       colnames(df) <- sprintf("x%i", seq_len(nrow(bbox)))
-      df <- df[sample(nrow(df)), ]
+      df <- df[sample(nrow(df)), , drop = FALSE]
       df$ranking <- seq_len(nrow(df)) - 1
       show_message(", add coordinates, calculate ranking", verbose = verbose)
-      dbWriteTable(conn = grtsdb, name = sprintf("level%02i", level),
-                   value = df, append = TRUE)
+      dbWriteTable(
+        conn = grtsdb, name = sprintf("level%02i", level),
+        value = df, append = TRUE
+      )
       return(invisible(NULL))
     } else {
-      add_level(grtsdb = grtsdb, level = level - 1, bbox = bbox,
-                          cellsize = cellsize, verbose = verbose)
+      add_level(
+        grtsdb = grtsdb, level = level - 1, bbox = bbox, cellsize = cellsize,
+        verbose = verbose
+      )
     }
   }
 
   if (max(which_level(grtsdb)) > level) {
     if (level < max(which_level(grtsdb)) - 1) {
-      add_level(grtsdb = grtsdb, level = level + 1, bbox = bbox,
-                cellsize = cellsize, verbose = verbose)
+      add_level(
+        grtsdb = grtsdb, level = level + 1, bbox = bbox,
+        cellsize = cellsize, verbose = verbose
+      )
     }
     show_message(
       "Adding level ", level, ": create table", appendLF = FALSE,
