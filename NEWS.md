@@ -4,6 +4,7 @@
 * New features `add_legacy_site()`, `drop_legacy_sites()` and
   `extract_legacy_sample()`.
   These functions improve the ranking of legacy sites.
+* Add a vignette on the basic usage.
 
 # grtsdb 0.1
 

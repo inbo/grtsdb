@@ -4,6 +4,11 @@ navbar:
   left:
   - text: NEWS
     href: news/index.html
+  - text: Tutorials
+    href: articles/index.html
+    menu:
+    - text: Basic Usage of grtsdb
+      href: articles/basic.html
   - text: Functions
     href: reference/index.html
   - text: Contributing
