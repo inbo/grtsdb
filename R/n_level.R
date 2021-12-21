@@ -17,5 +17,10 @@ n_level <- function(bbox, cellsize) {
   if (length(cellsize) < nrow(bbox)) {
     cellsize <- rep(cellsize, nrow(bbox))
   }
-  max(ceiling(log2(apply(bbox, 1, diff) / cellsize)))
+  n_cell <- apply(bbox, 1, diff) / cellsize
+  assert_that(
+    all(n_cell >= 2),
+    msg = "the bounding box must contain at least 2 cells in each dimension"
+  )
+  max(ceiling(log2(n_cell)))
 }

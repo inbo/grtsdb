@@ -30,4 +30,13 @@ test_that("basic functionality", {
     "data.frame"
   )
   RSQLite::dbDisconnect(conn)
+
+  expect_error(
+    n_level(matrix(0:1, nrow = 1), cellsize = 10),
+    "the bounding box must contain at least 2 cells in each dimension"
+  )
+  expect_identical(
+    n_level(matrix(0:1, nrow = 1), cellsize = 0.5),
+    1
+  )
 })
