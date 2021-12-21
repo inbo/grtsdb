@@ -119,5 +119,5 @@ SELECT %3$s, level%4$02i, ranking FROM cte_base ORDER BY level%4$02i, z",
     level, (2 ^ nrow(bbox)) ^ (level - 1), 2 ^ nrow(bbox), level - 1)
   res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
-  return(NULL)
+  return(invisible(NULL))
 }
