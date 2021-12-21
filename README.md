@@ -9,11 +9,11 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 ![GitHub](https://img.shields.io/github/license/inbo/grtsdb) [![R build
 status](https://github.com/inbo/grtsdb/workflows/R-CMD-check/badge.svg)](https://github.com/inbo/grtsdb/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/inbo/grtsdb/branch/master/graph/badge.svg)](https://codecov.io/gh/inbo/grtsdb?branch=master)
+coverage](https://codecov.io/gh/inbo/grtsdb/branch/master/graph/badge.svg)](https://app.codecov.io/gh/inbo/grtsdb?branch=master)
 ![GitHub code size in
 bytes](https://img.shields.io/github/languages/code-size/inbo/grtsdb.svg)
 ![GitHub repo
