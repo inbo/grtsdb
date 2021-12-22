@@ -19,6 +19,7 @@ abstract: Create an SQLite database containing the sampling framework for differ
   levels of resolution. Take a sample from this framework.
 license: GPL-3.0
 type: software
+repository-code: https://github.com/inbo/grtsdb
 identifiers:
 - type: url
   value: https://inbo.github.io/grtsdb

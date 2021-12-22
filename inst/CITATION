@@ -7,6 +7,6 @@ citEntry(
   year = 2021,
   url = "https://inbo.github.io/grtsdb",
   abstract = "Create an SQLite database containing the sampling framework for different levels of resolution. Take a sample from this framework.",
-  textVersion = "Onkelinx, Thierry; De Vos, Bruno (2021) grtsdb: Create a Sampling Frame Using GRTS. Version 0.2. https://inbo.github.io/grtsdb",
+  textVersion = "Onkelinx, Thierry; De Vos, Bruno (2021) grtsdb: Create a Sampling Frame Using GRTS. Version 0.2. https://inbo.github.io/grtsdb, https://github.com/inbo/grtsdb",
 )
 # end checklist entry
