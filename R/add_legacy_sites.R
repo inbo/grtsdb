@@ -25,7 +25,7 @@ add_legacy_sites <- function(legacy, bbox, cellsize, grtsdb = connect_db()) {
   fields <- dbListFields(grtsdb, sprintf("level%02i", level))
   fields <- fields[grep("^x[[:digit:]]*$", fields)]
   base_4 <- sprintf(
-    "(ranking %% %i) / %i AS l%02i", 4 ^ seq_len(level),
+    "(ranking %% %i) / %i AS l%02i", 4 ^ seq_len(level), # nolint
     4 ^ (seq_len(level) - 1), seq_len(level)
   )
   sql <- sprintf(

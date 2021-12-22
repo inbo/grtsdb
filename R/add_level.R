@@ -66,7 +66,7 @@ add_level <- function(bbox, cellsize, grtsdb = connect_db(), verbose = TRUE,
     res <- dbSendStatement(grtsdb, sql)
     dbClearResult(res)
     show_message(", add coordinates, calculate ranking", verbose = verbose)
-    fields <- sprintf("min(x%1$i / 2) AS x%1$i", seq_len(nrow(bbox)))
+    fields <- sprintf("min(x%1$i / 2) AS x%1$i", seq_len(nrow(bbox))) # nolint
     sql <- sprintf("INSERT INTO level%3$02i
 SELECT
   %1$s,
