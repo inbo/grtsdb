@@ -28,6 +28,18 @@ sample.
 
 ## Installation
 
+To install the latest stable version use
+
+``` r
+# activate the INBO r-universe
+options(
+  repos = c(
+    INBO = 'https://inbo.r-universe.dev', CRAN = 'https://cloud.r-project.org'
+  )
+)
+install.packages("grtsdb")
+```
+
 You can install the development version from
 [GitHub](https://github.com/) with:
 
