@@ -5,8 +5,8 @@ citEntry(
   title = "grtsdb: Create a Sampling Frame Using GRTS. Version 0.2",
   author = c(person(given = "Thierry", family = "Onkelinx"), person(given = "Bruno", family = "De Vos")),
   year = 2022,
-  url = "https://inbo.github.io/grtsdb",
+  url = "https://inbo.github.io/grtsdb/",
   abstract = "Create an SQLite database containing the sampling framework for different levels of resolution. Take a sample from this framework.",
-  textVersion = "Onkelinx, Thierry; De Vos, Bruno (2022) grtsdb: Create a Sampling Frame Using GRTS. Version 0.2. https://inbo.github.io/grtsdb, https://github.com/inbo/grtsdb",
+  textVersion = "Onkelinx, Thierry; De Vos, Bruno (2022) grtsdb: Create a Sampling Frame Using GRTS. Version 0.2. https://inbo.github.io/grtsdb/, https://github.com/inbo/grtsdb",
 )
 # end checklist entry

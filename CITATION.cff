@@ -22,4 +22,4 @@ type: software
 repository-code: https://github.com/inbo/grtsdb
 identifiers:
 - type: url
-  value: https://inbo.github.io/grtsdb
+  value: https://inbo.github.io/grtsdb/
