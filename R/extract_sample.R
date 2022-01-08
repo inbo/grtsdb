@@ -19,7 +19,7 @@ extract_sample <- function(
   )) {
     show_message(
       "Creating index for level ", level, ". May take some time...",
-      appendLF = FALSE, verbose = verbose
+      appendLF = TRUE, verbose = verbose
     )
     create_index(
       grtsdb = grtsdb, level = level, bbox = bbox, cellsize = cellsize,
