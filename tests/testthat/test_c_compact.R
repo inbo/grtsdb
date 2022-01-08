@@ -1,0 +1,16 @@
+test_that("restoring a compacted database works", {
+  bbox <- matrix(c(0, 0, 64, 64), ncol = 2)
+  cellsize <- 1
+  db <- connect_db(":memory:")
+  add_level(bbox = bbox, cellsize = cellsize, grtsdb = db)
+  s1 <- extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+  s2 <- extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 2)
+  s3 <- extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 3)
+  compact_db(db)
+  s1c <- extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+  s2c <- extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 2)
+  s3c <- extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 3)
+  expect_identical(s1, s1c)
+  expect_identical(s2, s2c)
+  expect_identical(s3, s3c)
+})
