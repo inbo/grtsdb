@@ -61,7 +61,7 @@ add_legacy_sites <- function(legacy, bbox, cellsize, grtsdb = connect_db()) {
   i <- 1
   target <- rep(0, level)
   f <- head(which(current[i, fields] > target), 1)
-  while (i <= nrow(current)) {
+  while (i <= nrow(current) && length(f) > 0) {
     where_stable <- sprintf(
       "%s = %s", tail(fields, -f), tail(unlist(current[i, fields]), -f)
     )
