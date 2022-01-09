@@ -19,17 +19,23 @@ add_level <- function(
 
   # nothing to do when the level already exists
   if (level %in% which_level(grtsdb)) {
-    return(invisible(NULL))
-  }
-
-  # add the most coarse level
-  if (level == 1) {
-    add_level_start(grtsdb = grtsdb, bbox = bbox, verbose = verbose)
+    assert_that(
+      validate_level(grtsdb = grtsdb, bbox = bbox, level = level),
+      msg = paste(
+        "Tables of different dimensions present in this database.",
+        "Please use a different database."
+      )
+    )
     return(invisible(NULL))
   }
 
   # create the previous level when no levels exist
   if (length(which_level(grtsdb)) == 0) {
+    # add the most coarse level
+    if (level == 1) {
+      add_level_start(grtsdb = grtsdb, bbox = bbox, verbose = verbose)
+      return(invisible(NULL))
+    }
     add_level(
       grtsdb = grtsdb, level = level - 1, bbox = bbox, cellsize = cellsize,
       verbose = verbose
@@ -51,6 +57,14 @@ add_level <- function(
       verbose = verbose
     )
   }
+
+  assert_that(
+    validate_level(grtsdb = grtsdb, bbox = bbox, level = level - 1),
+    msg = paste(
+      "Tables of different dimensions present in this database.",
+      "Please use a different database."
+    )
+  )
 
   # add the current level based on the previous level
   show_message(
@@ -144,6 +158,14 @@ restore_level <- function(grtsdb, bbox, level, verbose) {
     )
   }
 
+  assert_that(
+    validate_level(grtsdb = grtsdb, bbox = bbox, level = level + 1),
+    msg = paste(
+      "Tables of different dimensions present in this database.",
+      "Please use a different database."
+    )
+  )
+
   # restore the current level based on the next level
   show_message(
     "Adding level ", level, ": create table", appendLF = FALSE,
@@ -174,4 +196,10 @@ restore_level <- function(grtsdb, bbox, level, verbose) {
   res <- dbSendStatement(grtsdb, sql)
   dbClearResult(res)
   return(invisible(NULL))
+}
+
+#' @importFrom RSQLite dbListFields
+validate_level <- function(grtsdb, level, bbox) {
+  fields <- dbListFields(grtsdb, sprintf("level%02i", level))
+  length(grep("^x[0-9]+", fields)) == nrow(bbox)
 }

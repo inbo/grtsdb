@@ -40,3 +40,31 @@ test_that("basic functionality", {
     1
   )
 })
+
+test_that("add_level() doesn't mix dimensions", {
+  conn <- connect_db(":memory:")
+  bbox <- rbind(c(0, 7), c(0, 7))
+  cellsize <- 1
+  add_level(bbox = bbox, cellsize = cellsize, grtsdb = conn, verbose = FALSE)
+
+  bbox <- rbind(c(0, 7))
+  expect_error(
+    add_level(bbox = bbox, cellsize = cellsize, grtsdb = conn, verbose = FALSE),
+    "different dimensions"
+  )
+
+  bbox <- rbind(c(0, 15))
+  expect_error(
+    add_level(bbox = bbox, cellsize = cellsize, grtsdb = conn, verbose = FALSE),
+    "different dimensions"
+  )
+
+  compact_db(grtsdb = conn)
+
+  bbox <- rbind(c(0, 3))
+  expect_error(
+    add_level(bbox = bbox, cellsize = cellsize, grtsdb = conn, verbose = FALSE),
+    "different dimensions"
+  )
+  dbDisconnect(conn)
+})
