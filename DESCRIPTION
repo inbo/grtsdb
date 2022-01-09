@@ -1,28 +1,30 @@
 Package: grtsdb
-Title: Create A Sampling Frame Using GRTS
-Version: 0.1
-Authors@R: 
-    c(person(given = "Thierry",
-             family = "Onkelinx",
-             role = c("aut", "cre"),
-             email = "thierry.onkelinx@inbo.be",
-             comment = c(ORCID = "0000-0001-8804-4216")),
-      person(given = "Bruno",
-             family = "De Vos",
-             role = c("aut"),
-             email = "bruno.devos@inbo.be",
-             comment = c(ORCID = "0000-0001-9523-3453")),
-     person(given = "Research Institute for Nature and Forest",
-             role = c("cph", "fnd"),
-             email = "info@inbo.be"))
-Description: Create an SQLite database containing the sampling framework for different levels of resolution. Take a sample from this framework.
+Title: Create a Sampling Frame Using GRTS
+Version: 0.2
+Authors@R: c(
+    person("Thierry", "Onkelinx", , "thierry.onkelinx@inbo.be", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8804-4216")),
+    person("Bruno", "De Vos", , "bruno.devos@inbo.be", role = "aut",
+           comment = c(ORCID = "0000-0001-9523-3453")),
+    person("Research Institute for Nature and Forest", , , "info@inbo.be", role = c("cph", "fnd"))
+  )
+Description: Create an SQLite database containing the sampling framework
+    for different levels of resolution. Take a sample from this framework.
 License: GPL-3
+URL: https://inbo.github.io/grtsdb/, https://github.com/inbo/grtsdb
+BugReports: https://github.com/inbo/grtsdb/issues
+Imports:
+    DBI,
+    RSQLite,
+    assertthat
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat,
+    tidyverse
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
-Imports:
-  assertthat,
-  RSQLite
-Suggests:
-  testthat
+RoxygenNote: 7.1.2

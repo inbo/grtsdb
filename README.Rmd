@@ -1,0 +1,114 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# grtsdb
+
+<!-- badges: start -->
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+![GitHub](https://img.shields.io/github/license/inbo/grtsdb)
+[![R build status](https://github.com/inbo/grtsdb/workflows/R-CMD-check/badge.svg)](https://github.com/inbo/grtsdb/actions)
+[![Codecov test coverage](https://codecov.io/gh/inbo/grtsdb/branch/master/graph/badge.svg)](https://app.codecov.io/gh/inbo/grtsdb?branch=master)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/inbo/grtsdb.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/inbo/grtsdb.svg)
+<!-- badges: end -->
+
+The goal of `grtsdb` is to create a spatially balanced sample based on the 'Generalised Random Tesselation Stratified' strategy.
+We store the base schema in an SQLite database to make the sampling reproducible.
+Sampling the same database with the same parameters yields a stable sample.
+
+## Installation
+
+To install the latest stable version use
+
+``` r
+# activate the INBO r-universe
+options(
+  repos = c(
+    INBO = 'https://inbo.r-universe.dev', CRAN = 'https://cloud.r-project.org'
+  )
+)
+install.packages("grtsdb")
+```
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("inbo/grtsdb")
+```
+
+## Example
+
+This is a basic example.
+
+Connect to a database.
+
+```{r}
+tmp_copy <- tempfile(pattern = "grts", fileext = ".sqlite")
+if (system.file("grts.sqlite", package = "grtsdb") != "") {
+  file.copy(system.file("grts.sqlite", package = "grtsdb"), tmp_copy)
+}
+library(grtsdb)
+db <- connect_db(tmp_copy)
+```
+
+To extract a sample, you'll need to specify the bounding box in projected coordinates and the size of the grid cells.
+
+```{r example}
+bbox <- rbind(
+  c(0, 32),
+  c(0, 32)
+)
+extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+```
+
+Repeating the sample yields the same results.
+
+```{r}
+extract_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+```
+
+```{r echo = FALSE}
+drop_legacy_sites(grtsdb = db, level = 5)
+```
+
+You can add legacy sites to the sampling scheme.
+
+```{r}
+legacy <- rbind(
+  c(4, 4),
+  c(17, 6)
+)
+add_legacy_sites(legacy, bbox = bbox, cellsize = 1, grtsdb = db)
+extract_legacy_sample(grtsdb = db, samplesize = 10, bbox = bbox, cellsize = 1)
+```
+
+You can compact the database for storage.
+
+```{r}
+compact_db(db)
+```
+
+Disconnect the database when done.
+
+```{r}
+dbDisconnect(db)
+```
+
+```{r eval = system.file("grts.sqlite", package = "grtsdb") == "", echo = FALSE}
+dir.create("inst", showWarnings = FALSE)
+file.copy(tmp_copy, file.path("inst", "grts.sqlite"))
+```

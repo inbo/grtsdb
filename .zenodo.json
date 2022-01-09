@@ -1,0 +1,22 @@
+{
+  "title": "grtsdb: Create a Sampling Frame Using GRTS",
+  "version": "0.2",
+  "description": "Create an SQLite database containing the sampling framework for different levels of resolution. Take a sample from this framework.",
+  "creators": [
+    {
+      "name": "Onkelinx, Thierry",
+      "orcid": "https://orcid.org/0000-0001-8804-4216"
+    },
+    {
+      "name": "De Vos, Bruno",
+      "orcid": "https://orcid.org/0000-0001-9523-3453"
+    }
+  ],
+  "contributors": [],
+  "upload_type": "software",
+  "access_rights": "open",
+  "license": "GPL-3.0",
+  "communities": {
+    "identifier": "inbo"
+  }
+}

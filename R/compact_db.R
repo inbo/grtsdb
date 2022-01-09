@@ -2,6 +2,7 @@
 #' @export
 #' @inheritParams add_level
 #' @importFrom RSQLite dbSendStatement dbClearResult
+#' @family utility
 compact_db <- function(grtsdb = connect_db()) {
   assert_that(is_grtsdb(grtsdb))
   level <- dbListTables(grtsdb)
@@ -25,5 +26,5 @@ compact_db <- function(grtsdb = connect_db()) {
   )
   res <- dbSendStatement(grtsdb, "VACUUM")
   dbClearResult(res)
-  return(NULL)
+  return(invisible(NULL))
 }

@@ -4,13 +4,36 @@
 \alias{has_index}
 \title{has a table the required index}
 \usage{
-has_index(level, grtsdb = connect_db())
+has_index(level, grtsdb = connect_db(), legacy = FALSE, ...)
 }
 \arguments{
 \item{level}{the required level}
 
 \item{grtsdb}{the grtsdb object}
+
+\item{legacy}{Use legacy sites.
+Defaults to \code{FALSE}.}
+
+\item{...}{
+  Arguments passed on to \code{\link[=add_level]{add_level}}
+  \describe{
+    \item{\code{verbose}}{Display progress}
+    \item{\code{bbox}}{A two-column matrix.
+The first column has the minimum, the second the maximum values.
+Rows represent the spatial dimensions.}
+    \item{\code{cellsize}}{The size of each cell.
+Either a single value or one value for each dimension.}
+  }}
 }
 \description{
 has a table the required index
 }
+\seealso{
+Other utility: 
+\code{\link{compact_db}()},
+\code{\link{create_index}()},
+\code{\link{is_grtsdb}()},
+\code{\link{n_level}()},
+\code{\link{which_level}()}
+}
+\concept{utility}

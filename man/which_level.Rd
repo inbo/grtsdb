@@ -12,3 +12,12 @@ which_level(grtsdb = connect_db())
 \description{
 Return a vector of level number which are available in the database
 }
+\seealso{
+Other utility: 
+\code{\link{compact_db}()},
+\code{\link{create_index}()},
+\code{\link{has_index}()},
+\code{\link{is_grtsdb}()},
+\code{\link{n_level}()}
+}
+\concept{utility}

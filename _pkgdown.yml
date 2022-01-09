@@ -1,0 +1,40 @@
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: NEWS
+    href: news/index.html
+  - text: Tutorials
+    href: articles/index.html
+    menu:
+    - text: Basic Usage of grtsdb
+      href: articles/basic.html
+  - text: Functions
+    href: reference/index.html
+  - text: Contributing
+    href: CONTRIBUTING.html
+  right:
+  - icon: "fa fa-github"
+    href: https://github.com/inbo/grtsdb
+  - icon: "fa fa-twitter"
+    href: https://twitter.com/INBOVlaanderen
+  - icon: "fa fa-facebook"
+    href: https://www.facebook.com/pg/INBOVlaanderen
+
+reference:
+- title: Base functionality
+  contents:
+  - has_concept("base")
+- title: Incorporating legacy sites
+  contents:
+  - has_concept("legacy")
+- title: Auxiliary functions
+  contents:
+  - has_concept("utility")
+
+authors:
+  Thierry Onkelinx:
+    href: "https://www.muscardinus.be"
+  Research Institute for Nature and Forest:
+    href: "https://www.vlaanderen.be/inbo/en-gb"
+    html: "<img src='https://inbo.github.io/checklist/reference/figures/logo-en.png' height=24>"
